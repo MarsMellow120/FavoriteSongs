@@ -1,0 +1,41 @@
+﻿@model List<Song>
+@{
+    ViewBag.Title = "Song List";
+}
+
+<h2>Song List</h2>
+<a asp-controller="Song" asp-action="Add">Add New Song</a>
+<form asp-controller="Song" asp-action="Index">
+    <p>
+        <i class="fa-solid fa-magnifying-glass">Search: </i><input type="text" name="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+       <th><i class="fa-solid fa-music"> Song Title</i></th>
+        <th><i class="fa-solid fa-paintbrush">Artist</i></th>
+        <th><i class="fa-solid fa-dollar-sign">Cost</i></th>
+        <th><i class="fa-solid fa-calendar-days">Year Recorded</i></th>
+        <th><i class="fa-solid fa-pen-to-square">Edit/Delete</i></th></tr>
+    </thead>
+    <tbody>
+        @foreach (var song in Model)
+        {
+        <tr>
+            <td>@song.title</td>
+            <td>@song.artist</td>
+            <td>@song.cost</td>
+            <td>@song.yearRecorded</td>
+            <td>
+                <a asp-controller="Song" asp-action="Edit"
+                   asp-route-id="@song.Id">Edit | </a>
+                <a asp-controller="Song" asp-action="Delete"
+                   asp-route-id="@song.Id">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
